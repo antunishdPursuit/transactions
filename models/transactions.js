@@ -1,0 +1,42 @@
+module.exports = [
+    {
+        id: 1,
+        item_name: "Income",
+        amount: 8000,
+        date: "07/01/2023",
+        from: "Employer",
+        category: "Living",
+    },
+    {
+        id: 2,
+        item_name: "Rent",
+        amount: -1200,
+        date: "07/07/2023",
+        from: "Landlord",
+        category: "Living",
+    },
+    {
+        id: 3,
+        item_name: "Taxes",
+        amount: -2000,
+        date: "07/01/2023",
+        from: "Government",
+        category: "Living",
+    },
+    {
+        id: 4,
+        item_name: "Savings",
+        amount: 3000,
+        date: "07/01/2023",
+        from: "Bank",
+        category: "Living",
+    },
+    {
+        id: 5,
+        item_name: "Groceries",
+        amount: 500,
+        date: "07/10/2023",
+        from: "Store",
+        category: "Living",
+    },
+];

@@ -8,13 +8,18 @@ transactions.get("/", (req, res) => {
 });
 
 // SHOW
-transactions.get("/:arrayIndex", (req, res) => {
-    if (transactionsArray[req.params.arrayIndex]) {
-      res.json(transactionsArray[req.params.arrayIndex]);
-    } else {
-    //   res.status(404).json({ error: "PAge Not Found" });
-    res.status(404).redirect("/transactions");
+transactions.get("/:indexArray", (req, res) => {
+  for (let index = 0; index < transactionsArray.length; index++) {
+    const element = transactionsArray[index];
+    let indexOfArray = Number(req.params.indexArray) ? Number(req.params.indexArray) : req.params.indexArray
+    if (element.id === indexOfArray) {
+      console.log("ID:")
+      console.log(element.id)
+      console.log(req.params.indexArray)
+      res.json(element);
     }
+  }
+  res.status(404).redirect("/transactions");
   });
 
   // CREATE
@@ -30,10 +35,10 @@ transactions.delete("/:indexArray", (req, res) => {
   });
 
 // UPDATE
-transactions.put("/:arrayIndex", validateURL, async (req, res) => {
-  if (transactionsArray[req.params.arrayIndex]) {
-    transactionsArray[req.params.arrayIndex] = req.body;
-    res.status(200).json(transactionsArray[req.params.arrayIndex]);
+transactions.put("/:indexArray", validateURL, async (req, res) => {
+  if (transactionsArray[req.params.indexArray]) {
+    transactionsArray[req.params.indexArray] = req.body;
+    res.status(200).json(transactionsArray[req.params.indexArray]);
   } else {
     res.status(404).json({ error: "Not Found" });
   }
