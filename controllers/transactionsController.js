@@ -13,9 +13,6 @@ transactions.get("/:indexArray", (req, res) => {
     const element = transactionsArray[index];
     let indexOfArray = Number(req.params.indexArray) ? Number(req.params.indexArray) : req.params.indexArray
     if (element.id === indexOfArray) {
-      console.log("ID:")
-      console.log(element.id)
-      console.log(req.params.indexArray)
       res.json(element);
     }
   }
@@ -30,17 +27,28 @@ transactions.post("/", validateURL, (req, res) => {
 
     // DELETE
 transactions.delete("/:indexArray", (req, res) => {
-    const deletedtransaction = transactionsArray.splice(req.params.indexArray, 1);
-    res.status(200).json(deletedtransaction);
-  });
+  for (let index = 0; index < transactionsArray.length; index++) {
+    const element = transactionsArray[index];
+    let indexOfArray = Number(req.params.indexArray) ? Number(req.params.indexArray) : req.params.indexArray
+    if (element.id === indexOfArray) {
+      res.status(200).json(element);
+    }
+  }
+  // const deletedtransaction = transactionsArray.splice(req.params.indexArray, 1);
+  // res.status(200).json(deletedtransaction);
+});
 
 // UPDATE
 transactions.put("/:indexArray", validateURL, async (req, res) => {
-  if (transactionsArray[req.params.indexArray]) {
-    transactionsArray[req.params.indexArray] = req.body;
-    res.status(200).json(transactionsArray[req.params.indexArray]);
-  } else {
-    res.status(404).json({ error: "Not Found" });
+  for (let index = 0; index < transactionsArray.length; index++) {
+    let element = transactionsArray[index];
+    let indexOfArray = Number(req.params.indexArray) ? Number(req.params.indexArray) : req.params.indexArray
+    if (element.id === indexOfArray) {
+      transactionsArray[index] = req.body;
+      console.log(req.body)
+      console.log(element)
+      res.status(200).json(element);
+    } 
   }
 });
   
