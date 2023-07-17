@@ -16,7 +16,7 @@ transactions.get("/:indexArray", (req, res) => {
       res.json(element);
     }
   }
-  res.status(404).redirect("/transactions");
+  // res.status(404).redirect("/transactions");
   });
 
   // CREATE
@@ -27,15 +27,18 @@ transactions.post("/", validateURL, (req, res) => {
 
     // DELETE
 transactions.delete("/:indexArray", (req, res) => {
+  console.log(req.params.indexArray)
+  let indexofTransaction = 0
   for (let index = 0; index < transactionsArray.length; index++) {
     const element = transactionsArray[index];
     let indexOfArray = Number(req.params.indexArray) ? Number(req.params.indexArray) : req.params.indexArray
     if (element.id === indexOfArray) {
-      res.status(200).json(element);
+      indexofTransaction = index
     }
   }
-  // const deletedtransaction = transactionsArray.splice(req.params.indexArray, 1);
-  // res.status(200).json(deletedtransaction);
+  console.log(indexofTransaction)
+  const deletedtransaction = transactionsArray.splice(indexofTransaction, 1);
+  res.status(200).json(deletedtransaction);
 });
 
 // UPDATE
@@ -45,8 +48,6 @@ transactions.put("/:indexArray", validateURL, async (req, res) => {
     let indexOfArray = Number(req.params.indexArray) ? Number(req.params.indexArray) : req.params.indexArray
     if (element.id === indexOfArray) {
       transactionsArray[index] = req.body;
-      console.log(req.body)
-      console.log(element)
       res.status(200).json(element);
     } 
   }
